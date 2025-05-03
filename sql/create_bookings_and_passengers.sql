@@ -1,0 +1,24 @@
+CREATE TABLE IF NOT EXISTS bookings (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  userEmail VARCHAR(255) NOT NULL,
+  flightData JSON NOT NULL,
+  bookingDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS passengers (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  bookingId INT,
+  firstName VARCHAR(255),
+  lastName VARCHAR(255),
+  dateOfBirth DATE,
+  email VARCHAR(255),
+  seat VARCHAR(10),
+  FOREIGN KEY (bookingId) REFERENCES bookings(id) ON DELETE CASCADE
+);
+
+ALTER TABLE passengers ADD COLUMN phone VARCHAR(20);
+ALTER TABLE passengers ADD COLUMN gender VARCHAR(10);
+ALTER TABLE passengers ADD COLUMN passportNumber VARCHAR(50);
+
+SELECT * FROM bookings;
+SELECT * FROM passengers;
